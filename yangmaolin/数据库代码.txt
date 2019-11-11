@@ -1,0 +1,78 @@
+CREATE TABLE Users
+(
+username NVARCHAR(20) CONSTRAINT Users_Prim PRIMARY KEY,
+password NVARCHAR(20) NOT NULL,
+phonenum NCHAR(11),
+email NVARCHAR(30),
+usertype NOT NULL INT CONSTRAINT usertype_Chk CHECK(usertype=0 OR usertype=1) 
+)
+
+CREATE TABLE Movie
+(
+movieid NVARCHAR(20) CONSTRAINT  Movie_Prim PRIMARY KEY,
+moviename NVARCHAR(20) NOT NULL,
+language NVARCHAR(20) NOT NULL,
+releasetime date NOT NULL,
+filmlength int NOT NULL  CONSTRAINT filmlength_Chk CHECK(filmlength>=0),
+alias NVARCHAR(50)
+)
+
+
+CREATE TABLE Country
+(
+movieid NVARCHAR(20) CONSTRAINT Movie_Fore FOREIGN KEY REFERENCES Movie(movieid),
+countryname NVARCHAR(30) NOT NULL,
+CONSTRAINT Country_Prim PRIMARY KEY(movieid,countryname)
+)
+
+CREATE TABLE Type
+(
+movieid NVARCHAR(20) CONSTRAINT Movie1_Fore FOREIGN KEY REFERENCES Movie(movieid),
+typename NVARCHAR(30) NOT NULL ,
+CONSTRAINT Type_Prim PRIMARY KEY(movieid,typename)
+)
+
+CREATE TABLE Comment
+(
+movieid NVARCHAR(20) CONSTRAINT Movie2_Fore FOREIGN KEY REFERENCES Movie(movieid),
+username NVARCHAR(20) CONSTRAINT Users_Fore FOREIGN KEY REFERENCES Users(username),
+briefcomment  NVARCHAR(100) NOT NULL,
+starnum int NOT NULL  CONSTRAINT starnum_Chk CHECK(starnum>=0 AND starnum<=5),
+type NVARCHAR(20)NOT NULL  CONSTRAINT type_Chk CHECK(type='想看' OR type='看过' ),
+CONSTRAINT Comment_Prim PRIMARY KEY(movieid,username)
+)
+
+
+CREATE TABLE Award
+(
+movieid NVARCHAR(20) CONSTRAINT Movie3_Fore FOREIGN KEY REFERENCES Movie(movieid),
+prize NVARCHAR(30) NOT NULL,
+CONSTRAINT Award_Prim PRIMARY KEY(movieid,prize)
+)
+
+
+CREATE TABLE Label
+(
+movieid NVARCHAR(20) CONSTRAINT Movie4_Fore FOREIGN KEY REFERENCES Movie(movieid),
+labelname NVARCHAR(20) NOT NULL,
+CONSTRAINT Label_Prim PRIMARY KEY(movieid,labelname)
+)
+
+CREATE TABLE Staff
+(
+movieid NVARCHAR(20) CONSTRAINT Movie5_Fore FOREIGN KEY REFERENCES Movie(movieid),
+name NVARCHAR(20) NOT NULL,
+type NVARCHAR(20) NOT NULL  CONSTRAINT type2_Chk CHECK(type='导演' OR type='编剧' OR type='主演' OR type='其他' ),
+CONSTRAINT Staff_Prim PRIMARY KEY(movieid,name)
+)
+
+CREATE TABLE Discuss
+(
+discussnum INT CONSTRAINT Discuss_Prim PRIMARY KEY CONSTRAINT discussnum_Chk CHECK(discussnum>0),
+movieid NVARCHAR(20) NOT NULL CONSTRAINT Movie6_Fore FOREIGN KEY REFERENCES Movie(movieid),
+username NVARCHAR(20) NOT NULL CONSTRAINT Users2_Fore FOREIGN KEY REFERENCES Users(username),
+title  NVARCHAR(20) NOT NULL,
+subtance NVARCHAR(400) NOT NULL,
+writetime date NOT NULL,
+fathernum INT NOT NULL DEFAULT 0
+)
