@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 	
-	private static final String CREATE_MOVIE_SQL="INSERT INTO Movies VALUES(?,?,?,?,?,?)";
+	private static final String CREATE_MOVIE_SQL="INSERT INTO Movie VALUES(?,?,?,?,?,?)";
 	@Override
 	public void insertMovie(Movie movie) {
 		Connection conn = null;
@@ -32,7 +32,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 		}	
 	}
 	
-	private static final String UPDATE_MOVIE_SQL="UPDATE Movie SET movieid=\'?\',moviename=\'?\',language=\'?\',date=\'?\',time=?,date=\'aliasname\'";
+	private static final String UPDATE_MOVIE_SQL="UPDATE Movie SET movieid=\'?\',moviename=\'?\',language=\'?\',releasetime=\'?\',filmlength=?,date=\'alias\'";
 	@Override
 	public void updateMovie(Movie movie) {
 		Connection conn = null;
@@ -72,7 +72,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 		}	
 	}
 
-	private static final String GET_USER_SQL="SELECT * FROM Movie WHERE username=\'?\'";
+	private static final String GET_MOVIE_SQL="SELECT * FROM Movie WHERE moviename=\'?\'";
 	@Override
 	public Movie getMovie(String movieid) {
 		Connection conn = null;
@@ -80,16 +80,16 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 		Movie movie=new Movie();
 		try{
 			conn = getConnection();
-			pstm = conn.prepareStatement(GET_USER_SQL);
+			pstm = conn.prepareStatement(GET_MOVIE_SQL);
 			pstm.setString(1, movieid);
 			ResultSet rs=pstm.executeQuery();
 			rs.next();
 			movie.setMovieid(rs.getString("movieid"));
 			movie.setMoviename(rs.getString("moviename"));
-			movie.setLanguage(rs.getString("language;"));
-			movie.setDate(rs.getString("date"));
-			movie.setTime(rs.getInt("time"));
-			movie.setAliasname(rs.getString("aliasname"));
+			movie.setLanguage(rs.getString("language"));
+			movie.setDate(rs.getString("releasetime"));
+			movie.setTime(rs.getInt("filmlength"));
+			movie.setAliasname(rs.getString("alias"));
 			pstm.close();
 			conn.close();
 		}catch(Exception e){
@@ -119,10 +119,10 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 					Movie movie = new Movie();
 					movie.setMovieid(rs.getString("movieid"));
 					movie.setMoviename(rs.getString("moviename"));
-					movie.setLanguage(rs.getString("language;"));
-					movie.setDate(rs.getString("date"));
-					movie.setTime(rs.getInt("time"));
-					movie.setAliasname(rs.getString("aliasname"));
+					movie.setLanguage(rs.getString("language"));
+					movie.setDate(rs.getString("releasetime"));
+					movie.setTime(rs.getInt("filmlength"));
+					movie.setAliasname(rs.getString("alias"));
 					movies.add(movie);							
 				}
 				rs.close();
