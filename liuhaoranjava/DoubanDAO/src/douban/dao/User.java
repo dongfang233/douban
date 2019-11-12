@@ -1,11 +1,18 @@
 package douban.dao;
 
 public class User {
+	private String userid;
 	private String username;
 	private String password;
 	private String phonenum;
 	private String email;
 	private int usertype;//(0为管理员，1为普通用户)
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public String getUsername() {
 		return username;
 	}

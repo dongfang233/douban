@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserDAOMSImpl extends DAOBase implements UserDAO{
 	
-	private static final String CREATE_USER_SQL="INSERT INTO Users VALUES(?,?,?,?,?)";
+	private static final String CREATE_USER_SQL="INSERT INTO Users VALUES(?,?,?,?,?,?)";
 	@Override
 	public void insertUser(User user) {
 		Connection conn = null;
@@ -18,11 +18,12 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 		try{
 			conn = getConnection();
 			pstm = conn.prepareStatement(CREATE_USER_SQL);
-			pstm.setString(1, user.getUsername());
-			pstm.setString(2, user.getPassword());
-			pstm.setString(3, user.getPhonenum());
-			pstm.setString(4, user.getEmail());
-			pstm.setInt(5, user.getUsertype());
+			pstm.setString(1, user.getUserid());
+			pstm.setString(2, user.getUsername());
+			pstm.setString(3, user.getPassword());
+			pstm.setString(4, user.getPhonenum());
+			pstm.setString(5, user.getEmail());
+			pstm.setInt(6, user.getUsertype());
 			pstm.executeUpdate();
 			pstm.close();
 			conn.close();
@@ -31,19 +32,21 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 		}	
 	}
 	
-	private static final String UPDATE_USER_SQL="UPDATE Users SET username=\'?\',password=\'?\',phonenum=\'?\',email=\'?\',usertype=\'?\'";
+	private static final String UPDATE_USER_SQL="UPDATE Users SET userid=\'?\',username=\'?\',password=\'?\',phonenum=\'?\',email=\'?\',usertype=\'?\' WHERE userid=\'?\'";
 	@Override
-	public void updateUser(User user) {
+	public void updateUser(User user,String userid) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try{
 			conn = getConnection();
 			pstm = conn.prepareStatement(UPDATE_USER_SQL);
-			pstm.setString(1, user.getUsername());
-			pstm.setString(2, user.getPassword());
-			pstm.setString(3, user.getPhonenum());
-			pstm.setString(4, user.getEmail());
-			pstm.setInt(5, user.getUsertype());
+			pstm.setString(1, user.getUserid());
+			pstm.setString(2, user.getUsername());
+			pstm.setString(3, user.getPassword());
+			pstm.setString(4, user.getPhonenum());
+			pstm.setString(5, user.getEmail());
+			pstm.setInt(6, user.getUsertype());
+			pstm.setString(7, userid);
 			pstm.executeUpdate();
 			pstm.close();
 			conn.close();
@@ -53,15 +56,15 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 		
 	}
 	
-	private static final String DELETE_USER_SQL="DELETE FROM Users WHERE username=\'?\'";
+	private static final String DELETE_USER_SQL="DELETE FROM Users WHERE userid=\'?\'";
 	@Override
-	public void deleteUser(String username) {
+	public void deleteUser(String userid) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try{
 			conn = getConnection();
 			pstm = conn.prepareStatement(DELETE_USER_SQL);
-			pstm.setString(1, username);
+			pstm.setString(1, userid);
 			pstm.executeUpdate();
 			pstm.close();
 			conn.close();
@@ -70,18 +73,19 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 		}	
 	}
 
-	private static final String GET_USER_SQL="SELECT * FROM Users WHERE username=\'?\'";
+	private static final String GET_USER_SQL="SELECT * FROM Users WHERE userid=\'?\'";
 	@Override
-	public User getUser(String username) {
+	public User getUser(String userid) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		User user=new User();
 		try{
 			conn = getConnection();
 			pstm = conn.prepareStatement(GET_USER_SQL);
-			pstm.setString(1, username);
+			pstm.setString(1, userid);
 			ResultSet rs=pstm.executeQuery();
 			rs.next();
+			user.setUserid(rs.getString("userid"));
 			user.setUsername(rs.getString("username"));
 			user.setPassword(rs.getString("password"));
 			user.setPhonenum(rs.getString("phonenum"));
@@ -114,6 +118,7 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 				rs=stmt.executeQuery(finalsql);
 				while(rs.next()){
 					User user = new User();
+					user.setUserid(rs.getString("userid"));
 					user.setUsername(rs.getString("username"));
 					user.setPassword(rs.getString("password"));
 					user.setPhonenum(rs.getString("phonenum"));
