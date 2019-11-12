@@ -1,12 +1,15 @@
 package douban.dao;
 
+import java.sql.Date;
+
 public class Movie {
 	private String moviename;
 	private String movieid;
 	private String language;
-	private String date;
+	private Date date;
 	private int time;
 	private String aliasname;
+	private byte[] moviepicture;
 	public String getMoviename() {
 		return moviename;
 	}
@@ -25,10 +28,10 @@ public class Movie {
 	public void setLanguage(String language) {
 		this.language = language;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public int getTime() {
@@ -43,4 +46,11 @@ public class Movie {
 	public void setAliasname(String aliasname) {
 		this.aliasname = aliasname;
 	}
+	public byte[] getMoviepicture() {
+		return moviepicture;
+	}
+	public void setMoviepicture(byte[] moviepicture) {
+		this.moviepicture = moviepicture;
+	}
+	
 }
