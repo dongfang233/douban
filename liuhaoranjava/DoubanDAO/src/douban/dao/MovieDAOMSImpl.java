@@ -32,9 +32,9 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 		}	
 	}
 	
-	private static final String UPDATE_MOVIE_SQL="UPDATE Movie SET movieid=\'?\',moviename=\'?\',language=\'?\',releasetime=\'?\',filmlength=?,date=\'alias\'";
+	private static final String UPDATE_MOVIE_SQL="UPDATE Movie SET movieid=\'?\',moviename=\'?\',language=\'?\',releasetime=\'?\',filmlength=?,date=\'alias\' WHERE movieid=\'?\'";
 	@Override
-	public void updateMovie(Movie movie) {
+	public void updateMovie(Movie movie,String movieid) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try{
@@ -46,6 +46,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 			pstm.setString(4, movie.getDate());
 			pstm.setInt(5, movie.getTime());
 			pstm.setString(6, movie.getAliasname());
+			pstm.setString(7, movieid);
 			pstm.executeUpdate();
 			pstm.close();
 			conn.close();
@@ -72,7 +73,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 		}	
 	}
 
-	private static final String GET_MOVIE_SQL="SELECT * FROM Movie WHERE moviename=\'?\'";
+	private static final String GET_MOVIE_SQL="SELECT * FROM Movie WHERE movieid=\'?\'";
 	@Override
 	public Movie getMovie(String movieid) {
 		Connection conn = null;
