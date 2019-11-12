@@ -65,29 +65,26 @@ public class TypeesDAOMSImpl extends DAOBase implements TypeesDAO{
 
 	private static final String GET_TYPEES_SQL="SELECT * FROM Typees WHERE typeid=\'?\'";
 	@Override
-	public List<Typees> getTypees(String typeesid) {
-		List<Typees> typees = new ArrayList<Typees>();
+	public Typees getTypees(String typeesid) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
+		Typees type = new Typees();
 		try{
 			conn = getConnection();
 			pstm = conn.prepareStatement(GET_TYPEES_SQL);
 			pstm.setString(1, typeesid);
 			rs=pstm.executeQuery();
-			while(rs.next()){
-				Typees type = new Typees();
-				type.setTypeid(rs.getString("typeid"));
-				type.setTypename(rs.getString("typename"));
-				typees.add(type);				
-			}
+			rs.next();
+			type.setTypeid(rs.getString("typeid"));
+			type.setTypename(rs.getString("typename"));;				
 			rs.close();
 			pstm.close();
 			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return typees;
+		return type;
 	}
 
 	private static final String SEARCH_TYPEES_SQL="SELECT * FROM Typees";

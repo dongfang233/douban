@@ -97,29 +97,26 @@ public class CountryDAOMSImpl extends DAOBase implements CountryDAO{
 
 	private static final String GET_COUNTRY_SQL="SELECT * FROM Country WHERE countryid=\'?\'";
 	@Override
-	public List<Country> getCountry(String countryid) {
-		List<Country> countries = new ArrayList<Country>();
+	public Country getCountry(String countryid) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		ResultSet rs = null;
+		Country country = new Country();
 		try{
 			conn = getConnection();
 			pstm = conn.prepareStatement(GET_COUNTRY_SQL);
 			pstm.setString(1, countryid);
 			rs=pstm.executeQuery();
-			while(rs.next()){
-				Country country = new Country();
-				country.setCountryid(rs.getString("countryid"));
-				country.setCountryname(rs.getString("countryname"));
-				countries.add(country);				
-			}
+			rs.next();
+			country.setCountryid(rs.getString("countryid"));
+			country.setCountryname(rs.getString("countryname"));			
 			rs.close();
 			pstm.close();
 			conn.close();
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return countries;
+		return country;
 	}
 
 }
