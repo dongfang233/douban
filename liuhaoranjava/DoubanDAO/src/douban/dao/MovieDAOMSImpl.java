@@ -138,5 +138,4 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 			}
 			return movies;
 	}
-
 }
