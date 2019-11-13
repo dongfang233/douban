@@ -11,13 +11,13 @@ public class Movie_TypeesDAOMSImpl extends DAOBase implements Movie_TypeesDAO{
 
 	private static final String CREATE_MOVIE_TYPEES_SQL="INSERT INTO Movie_Typees VALUES(?,?)";
 	@Override
-	public void insertMovie_Typees(Movie_typees movie_typees) {
+	public void insertMovie_Typees(Movie_Typees movie_typees) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try{
 			conn = getConnection();
 			pstm = conn.prepareStatement(CREATE_MOVIE_TYPEES_SQL);
-			pstm.setString(1, movie_typees.getTypeid());
+			pstm.setString(1, movie_typees.getMovieid());
 			pstm.setString(2, movie_typees.getTypeid());
 			pstm.executeUpdate();
 			pstm.close();
