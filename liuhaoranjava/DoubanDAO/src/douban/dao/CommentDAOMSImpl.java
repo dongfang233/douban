@@ -131,5 +131,20 @@ public class CommentDAOMSImpl extends DAOBase implements CommentDAO{
 		}
 		return comments;
 	}
-
+	
+	public int showAvgStar(String moviename) {
+		int avgstar=0;
+		Connection conn=null;
+		Movie movie=new Movie();
+		List<Movie> movies = new ArrayList<Movie>();
+		MovieDAO moviedao=new MovieDAOMSImpl();
+		movies=moviedao.getMovieByC("moviename="+moviename);
+		if(movies.get(0)==null) {
+			//没找到电影名
+		}else { //找到电影名对应id
+			movie=movies.get(0);
+			String movieid=movie.getMovieid();
+		}
+		return avgstar;
+	}
 }
