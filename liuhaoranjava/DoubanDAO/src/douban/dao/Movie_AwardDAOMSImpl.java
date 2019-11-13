@@ -27,7 +27,7 @@ public class Movie_AwardDAOMSImpl extends DAOBase implements Movie_AwardDAO{
 		}
 	}
 	
-	private static final String UPDATE_MOVIE_AWARD_SQL="UPDATE Movie_Award SET movieid=\'?\',awardid=\'?\' WHERE movieid=\'?\' and awardid=\\'?\\'";
+	private static final String UPDATE_MOVIE_AWARD_SQL="UPDATE Movie_Award SET movieid=\'?\',awardid=\'?\' WHERE movieid=\'?\' and awardid=\'?\'";
 	@Override
 	public void updateMovie_Award(Movie_Award movie_award, String movieid,String awardid) {
 		Connection conn = null;
