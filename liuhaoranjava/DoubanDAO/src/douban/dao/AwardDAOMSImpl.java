@@ -63,7 +63,7 @@ public class AwardDAOMSImpl extends DAOBase implements AwardDAO{
 		}	
 	}
 
-	private static final String SEARCH_AWARD_SQL="SELECT * FROM Award";
+	private static final String GET_AWARD_SQL="SELECT * FROM Award WHERE awardid=\'?\'";
 	@Override
 	public Award getAward(String awardid) {
 		Connection conn = null;
@@ -87,7 +87,7 @@ public class AwardDAOMSImpl extends DAOBase implements AwardDAO{
 		return award;
 	}
 
-	private static final String GET_AWARD_SQL="SELECT * FROM Award WHERE awardid=\'?\'";
+	private static final String SEARCH_AWARD_SQL="SELECT * FROM Award";
 	@Override
 	public List<Award> getAwardByC(String sql) {
 		List<Award> awards = new ArrayList<Award>();
