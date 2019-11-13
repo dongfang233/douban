@@ -65,7 +65,7 @@ public class Movie_AwardDAOMSImpl extends DAOBase implements Movie_AwardDAO{
 		}	
 	}
 
-	private static final String SEARCH_MOVIE_AWARD_SQL="SELECT * FROM Award";
+	private static final String SEARCH_MOVIE_AWARD_SQL="SELECT * FROM Movie_Award";
 	@Override
 	public List<Movie_Award> getMovie_AwardByC(String sql) {
 		List<Movie_Award> Movie_Awards = new ArrayList<Movie_Award>();
