@@ -1,0 +1,115 @@
+CREATE TABLE Users
+(
+userid NVARCHAR(20) CONSTRAINT Users_Prim PRIMARY KEY,
+username NVARCHAR(20) NOT NULL,
+passwords NVARCHAR(20) NOT NULL,
+phonenum NCHAR(11),
+email NVARCHAR(30),
+usertype INT CONSTRAINT usertype_Chk CHECK(usertype=0 OR usertype=1) 
+)
+
+CREATE TABLE Movie
+(
+movieid NVARCHAR(20) CONSTRAINT  Movie_Prim PRIMARY KEY,
+moviename NVARCHAR(20) NOT NULL,
+languages NVARCHAR(20) NOT NULL,
+releasetime date NOT NULL,
+filmlength int NOT NULL  CONSTRAINT filmlength_Chk CHECK(filmlength>=0),
+alias NVARCHAR(50),
+moviepicture image NOT NULL
+)
+
+
+CREATE TABLE Country
+(
+countryid NVARCHAR(20) CONSTRAINT Country_Prim PRIMARY KEY,
+countryname NVARCHAR(30) NOT NULL,
+)
+
+CREATE TABLE Typees
+(
+typeid NVARCHAR(20) CONSTRAINT Typees_Prim PRIMARY KEY,
+typename NVARCHAR(30) NOT NULL,
+)
+
+CREATE TABLE Comment
+(
+movieid NVARCHAR(20) CONSTRAINT Movie2_Fore FOREIGN KEY REFERENCES Movie(movieid),
+userid NVARCHAR(20) CONSTRAINT Users_Fore FOREIGN KEY REFERENCES Users(userid),
+briefcomment TEXT NOT NULL,
+starnum int NOT NULL  CONSTRAINT starnum_Chk CHECK(starnum>=0 AND starnum<=5),
+type NVARCHAR(20)NOT NULL  CONSTRAINT type_Chk CHECK(type='想看' OR type='看过' ),
+CONSTRAINT Comment_Prim PRIMARY KEY(movieid,userid)
+)
+
+
+CREATE TABLE Award
+(
+awardid NVARCHAR(20) CONSTRAINT Award_Prim PRIMARY KEY,
+prize NVARCHAR(30) NOT NULL,
+)
+
+
+CREATE TABLE Label
+(
+labelid NVARCHAR(20) CONSTRAINT Label_Prim PRIMARY KEY,
+labelname NVARCHAR(20) NOT NULL,
+)
+
+CREATE TABLE Staff
+(
+staffid NVARCHAR(20) CONSTRAINT Staff_Prim PRIMARY KEY,
+name NVARCHAR(20) NOT NULL,
+picture IMAGE NOT NULL
+)
+
+
+CREATE TABLE Discuss
+(
+discussid NVARCHAR(20) CONSTRAINT Discuss_Prim PRIMARY KEY ,
+movieid NVARCHAR(20) NOT NULL CONSTRAINT Movie6_Fore FOREIGN KEY REFERENCES Movie(movieid),
+userid NVARCHAR(20) NOT NULL CONSTRAINT Users2_Fore FOREIGN KEY REFERENCES Users(userid),
+title  NVARCHAR(20) NOT NULL,
+subtance TEXT NOT NULL,
+writetime date NOT NULL,
+fatherid NVARCHAR(20) DEFAULT NULL
+)
+
+
+CREATE TABLE Movie_Award
+(
+movieid NVARCHAR(20) CONSTRAINT Movie7_Fore FOREIGN KEY REFERENCES Movie(movieid),
+awardid NVARCHAR(20) CONSTRAINT Award1_Fore FOREIGN KEY REFERENCES Award(awardid),
+CONSTRAINT Movie_Award_Prim PRIMARY KEY(movieid,awardid)
+)
+
+CREATE TABLE Movie_Label
+(
+movieid NVARCHAR(20) CONSTRAINT Movie8_Fore FOREIGN KEY REFERENCES Movie(movieid),
+labelid NVARCHAR(20) CONSTRAINT Label1_Fore FOREIGN KEY REFERENCES Label(labelid),
+counts INT NOT NULL DEFAULT 1 CONSTRAINT counts_Chk CHECK(counts>0),
+CONSTRAINT Movie_Label_Prim PRIMARY KEY(movieid,labelid)
+)
+
+CREATE TABLE Movie_Staff
+(
+movieid NVARCHAR(20) CONSTRAINT Movie9_Fore FOREIGN KEY REFERENCES Movie(movieid),
+staffid NVARCHAR(20) CONSTRAINT Staff1_Fore FOREIGN KEY REFERENCES Staff(staffid),
+rolename NVARCHAR(20),
+position NVARCHAR(20) NOT NULL  CONSTRAINT position_Chk CHECK(position='导演' OR position='编剧' OR position='主演' OR position='其他' ),
+CONSTRAINT Movie_Staff_Prim PRIMARY KEY(movieid,staffid)
+)
+
+CREATE TABLE Movie_Country
+(
+movieid NVARCHAR(20) CONSTRAINT Movie10_Fore FOREIGN KEY REFERENCES Movie(movieid),
+countryid NVARCHAR(20) CONSTRAINT Country1_Fore FOREIGN KEY REFERENCES Country(countryid),
+CONSTRAINT Movie_Country_Prim PRIMARY KEY(movieid,countryid)
+)
+
+CREATE TABLE Movie_Typees
+(
+movieid NVARCHAR(20) CONSTRAINT Movie11_Fore FOREIGN KEY REFERENCES Movie(movieid),
+typeid NVARCHAR(20) CONSTRAINT Typees1_Fore FOREIGN KEY REFERENCES Typees(typeid),
+CONSTRAINT Movie_Typees_Prim PRIMARY KEY(movieid,typeid)
+)
