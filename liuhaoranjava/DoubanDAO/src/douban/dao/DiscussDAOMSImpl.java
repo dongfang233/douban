@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 	
-	private static final String CREATE_DISCUSS_SQL="INSERT INTO Movie VALUES(?,?,?,?,?,?,?)";
+	private static final String CREATE_DISCUSS_SQL="INSERT INTO Discuss VALUES(?,?,?,?,?,?,?,?)";
 	@Override
 	public void insertDiscuss(Discuss discuss) {
 		Connection conn = null;
@@ -22,12 +22,13 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 			conn = getConnection();
 			pstm = conn.prepareStatement(CREATE_DISCUSS_SQL);
 			pstm.setString(1, discuss.getDiscussid());
-			pstm.setString(2, discuss.getMovieid());
-			pstm.setString(3, discuss.getUserid());
-			pstm.setString(4, discuss.getTitle());
-			pstm.setString(5,discuss.getSubtance());
-			pstm.setDate(6, discuss.getWritetime());
-			pstm.setString(7, discuss.getFatherid());
+			pstm.setString(2, discuss.getGroupid());
+			pstm.setString(3, discuss.getMovieid());
+			pstm.setString(4, discuss.getUserid());
+			pstm.setString(5, discuss.getTitle());
+			pstm.setString(6,discuss.getSubtance());
+			pstm.setDate(7, discuss.getWritetime());
+			pstm.setString(8, discuss.getFatherid());
 			pstm.executeUpdate();
 			pstm.close();
 			conn.close();
@@ -36,23 +37,24 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 		}	
 	}
 	
-	private static final String UPDATE_DISCUSS_SQL="UPDATE Discuss SET discussid=? ,"
+	private static final String UPDATE_DISCUSS_SQL="UPDATE Discuss SET discussid=? ,groupid=? ,"
 			+ "movieid=? ,userid=? ,title=? ,subtance=? ,writetime=? ,fatherid=?  where discussid=? ";
 	@Override
-	public void updateDiscuss(Discuss discuss,String id) {
+	public void updateDiscuss(Discuss discuss,String discussid) {
 		Connection conn = null;
 		PreparedStatement pstm = null;
 		try{
 			conn = getConnection();
 			pstm = conn.prepareStatement(UPDATE_DISCUSS_SQL);
 			pstm.setString(1, discuss.getDiscussid());
-			pstm.setString(2, discuss.getMovieid());
-			pstm.setString(3, discuss.getUserid());
-			pstm.setString(4, discuss.getTitle());
-			pstm.setString(5,discuss.getSubtance());
-			pstm.setDate(6, discuss.getWritetime());
-			pstm.setString(7, discuss.getFatherid());
-			pstm.setString(8, id);
+			pstm.setString(2, discuss.getGroupid());
+			pstm.setString(3, discuss.getMovieid());
+			pstm.setString(4, discuss.getUserid());
+			pstm.setString(5, discuss.getTitle());
+			pstm.setString(6,discuss.getSubtance());
+			pstm.setDate(7, discuss.getWritetime());
+			pstm.setString(8, discuss.getFatherid());
+			pstm.setString(9, discussid);
 			pstm.executeUpdate();
 			pstm.close();
 			conn.close();
@@ -61,7 +63,7 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 		}	
 		
 	}
-	
+
 	private static final String DELETE_DISCUSS_SQL="DELETE FROM Discuss WHERE discussid=? ";
 	@Override
 	public void deleteDiscuss(String discussid) {
@@ -92,6 +94,7 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 			ResultSet rs=pstm.executeQuery();
 			rs.next();
 			discuss.setDiscussid(rs.getString("discussid"));
+			discuss.setGroupid(rs.getString("groupid"));
 			discuss.setMovieid(rs.getString("movieid"));
 			discuss.setUserid(rs.getString("userid"));
 			discuss.setTitle(rs.getString("title"));
@@ -126,6 +129,7 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 				while(rs.next()){
 					Discuss discuss = new Discuss();
 					discuss.setDiscussid(rs.getString("discussid"));
+					discuss.setGroupid(rs.getString("groupid"));
 					discuss.setMovieid(rs.getString("movieid"));
 					discuss.setUserid(rs.getString("userid"));
 					discuss.setTitle(rs.getString("title"));

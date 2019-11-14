@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Discuss {
 	String discussid;
+	String groupid;
 	String movieid;
 	String userid;
 	String title;
@@ -15,6 +16,12 @@ public class Discuss {
 	}
 	public void setDiscussid(String discussid) {
 		this.discussid = discussid;
+	}
+	public String getGroupid() {
+		return groupid;
+	}
+	public void setGroupid(String groupid) {
+		this.groupid = groupid;
 	}
 	public String getMovieid() {
 		return movieid;
