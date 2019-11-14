@@ -90,7 +90,7 @@ public class LabelDAOMSImpl extends DAOBase implements LabelDAO{
 
 	private static final String SEARCH_LABEL_SQL="SELECT * FROM Label";
 	@Override
-	public List<Label> getCountryByC(String sql) {
+	public List<Label> getLabelByC(String sql) {
 		List<Label> labels = new ArrayList<Label>();
 		Connection conn = null;
 		Statement stmt = null;
