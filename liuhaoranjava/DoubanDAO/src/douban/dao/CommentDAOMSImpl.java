@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class CommentDAOMSImpl extends DAOBase implements CommentDAO{
@@ -134,16 +135,32 @@ public class CommentDAOMSImpl extends DAOBase implements CommentDAO{
 	
 	public int showAvgStar(String moviename) {
 		int avgstar=0;
-		Connection conn=null;
+		//Connection conn=null;
 		Movie movie=new Movie();
 		List<Movie> movies = new ArrayList<Movie>();
-		MovieDAO moviedao=new MovieDAOMSImpl();
+		MovieDAO moviedao=DAOFactory.getMovieDAO();//new MovieDAOMSImpl();
 		movies=moviedao.getMovieByC("moviename="+moviename);
 		if(movies.get(0)==null) {
 			//没找到电影名
 		}else { //找到电影名对应id
 			movie=movies.get(0);
 			String movieid=movie.getMovieid();
+			List<Comment> comments=new ArrayList<Comment>();
+			CommentDAO commentdao=new CommentDAOMSImpl();
+			comments=commentdao.getCommentByC("movieid="+movieid);
+			if(comments.get(0)==null) {
+				//该电影无评分
+			}else {
+				Iterator<Comment> it=comments.iterator();
+				int i=0;
+				while(it.hasNext()) {
+					Comment comment=new Comment();
+					comment=it.next();
+					avgstar+=comment.getStarnum();
+					i++;
+				}
+				avgstar/=i;
+			}
 		}
 		return avgstar;
 	}

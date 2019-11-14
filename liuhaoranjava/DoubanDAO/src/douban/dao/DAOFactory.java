@@ -14,4 +14,8 @@ public class DAOFactory {
 		UserDAO userDAO=new UserDAOMSImpl();
 		return userDAO;
 	}
+	public static MovieDAO getMovieDAO() {
+		MovieDAO movieDAO=new MovieDAOMSImpl();
+		return movieDAO;
+	}
 }
