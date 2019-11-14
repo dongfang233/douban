@@ -1,10 +1,12 @@
 package douban.dao;
 
+import java.sql.Date;
+
 public class User_Group {
 	private String userid;
 	private String groupid;
 	private String leader;
-	private String jointime;
+	private Date jointime;
 	public String getUserid() {
 		return userid;
 	}
@@ -23,10 +25,11 @@ public class User_Group {
 	public void setLeader(String leader) {
 		this.leader = leader;
 	}
-	public String getJointime() {
+	public Date getJointime() {
 		return jointime;
 	}
-	public void setJointime(String jointime) {
+	public void setJointime(Date jointime) {
 		this.jointime = jointime;
 	}
+	
 }

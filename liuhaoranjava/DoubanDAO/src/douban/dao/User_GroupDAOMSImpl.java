@@ -20,7 +20,7 @@ public class User_GroupDAOMSImpl extends DAOBase implements User_GroupDAO{
 			pstm.setString(1, user_group.getUserid());
 			pstm.setString(2, user_group.getGroupid());
 			pstm.setString(3, user_group.getLeader());
-			pstm.setString(4, user_group.getJointime());
+			pstm.setDate(4, user_group.getJointime());
 			pstm.executeUpdate();
 			pstm.close();
 			conn.close();
@@ -40,7 +40,7 @@ public class User_GroupDAOMSImpl extends DAOBase implements User_GroupDAO{
 			pstm.setString(1, user_group.getUserid());
 			pstm.setString(2, user_group.getGroupid());
 			pstm.setString(3, user_group.getLeader());
-			pstm.setString(4, user_group.getJointime());
+			pstm.setDate(4, user_group.getJointime());
 			pstm.setString(5, userid);
 			pstm.setString(6, groupid);
 			pstm.executeUpdate();
@@ -85,7 +85,7 @@ public class User_GroupDAOMSImpl extends DAOBase implements User_GroupDAO{
 			user_group.setUserid(rs.getString("userid"));
 			user_group.setGroupid(rs.getString("groupid"));
 			user_group.setLeader(rs.getString("leader"));
-			user_group.setJointime(rs.getString("jointime"));
+			user_group.setJointime(rs.getDate("jointime"));
 			pstm.close();
 			conn.close();
 		}catch(Exception e){
@@ -116,7 +116,7 @@ public class User_GroupDAOMSImpl extends DAOBase implements User_GroupDAO{
 				user_group.setUserid(rs.getString("userid"));
 				user_group.setGroupid(rs.getString("groupid"));
 				user_group.setLeader(rs.getString("leader"));
-				user_group.setJointime(rs.getString("jointime"));
+				user_group.setJointime(rs.getDate("jointime"));
 				user_groups.add(user_group);				
 			}
 			rs.close();
