@@ -9,7 +9,7 @@ import java.util.List;
 
 public class User_GroupDAOMSImpl extends DAOBase implements User_GroupDAO{
 
-	private static final String CREATE_USER_GROUP_SQL="INSERT INTO User_Group VALUES(?,?,?,?)";
+	private static final String CREATE_USER_GROUP_SQL="INSERT INTO Users_Groups VALUES(?,?,?,?)";
 	@Override
 	public void insertUser_Group(User_Group user_group) {
 		Connection conn = null;
@@ -29,7 +29,7 @@ public class User_GroupDAOMSImpl extends DAOBase implements User_GroupDAO{
 		}	
 	}
 
-	private static final String UPDATE_USER_GROUP_SQL="UPDATE User_Group SET userid=? ,groupid=? ,rolename=? ,position=?  WHERE userid=?  and groupid=? ";
+	private static final String UPDATE_USER_GROUP_SQL="UPDATE Users_Groups SET userid=? ,groupid=? ,rolename=? ,position=?  WHERE userid=?  and groupid=? ";
 	@Override
 	public void updateUser_Group(User_Group user_group, String userid, String groupid) {
 		Connection conn = null;
@@ -51,7 +51,7 @@ public class User_GroupDAOMSImpl extends DAOBase implements User_GroupDAO{
 		}
 	}
 
-	private static final String DELETE_USER_GROUP_SQL="DELETE FROM User_Group WHERE userid=?  and groupid=? ";
+	private static final String DELETE_USER_GROUP_SQL="DELETE FROM Users_Groups WHERE userid=?  and groupid=? ";
 	@Override
 	public void deleteUser_Group(String userid, String groupid) {
 		Connection conn = null;
@@ -69,7 +69,7 @@ public class User_GroupDAOMSImpl extends DAOBase implements User_GroupDAO{
 		}	
 	}
 
-	private static final String GET_USER_GROUP_SQL="SELECT * FROM User_Group WHERE userid=?  and groupid=? ";
+	private static final String GET_USER_GROUP_SQL="SELECT * FROM Users_Groups WHERE userid=?  and groupid=? ";
 	@Override
 	public User_Group getUser_Group(String userid, String groupid) {
 		Connection conn = null;
@@ -94,7 +94,7 @@ public class User_GroupDAOMSImpl extends DAOBase implements User_GroupDAO{
 		return user_group;	
 	}
 
-	private static final String SEARCH_USER_GROUP_SQL="SELECT * FROM User_Group";
+	private static final String SEARCH_USER_GROUP_SQL="SELECT * FROM Users_Groups";
 	@Override
 	public List<User_Group> getUser_GroupByC(String sql) {
 		List<User_Group> user_groups = new ArrayList<User_Group>();
