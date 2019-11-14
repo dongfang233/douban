@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -142,7 +143,10 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 			return discusses;
 	}
 	
-	public List<Discuss> getSortByC(List<Discuss> discusses,String asc_des) {
+	public List<Discuss> getSortByC(String asc_des) {
+		List<Discuss> discusses=new ArrayList<Discuss>();
+		DiscussDAO discussdao=DAOFactory.getDiscussDAO();
+		discusses=discussdao.getDiscussByC("");
 		Collections.sort(discusses, new Comparator<Discuss>() {
 			public int compare(Discuss m1, Discuss m2) {
 				if(null == m1.getWritetime()) 
@@ -161,4 +165,29 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 		return discusses;
 	}
 
+	private static final int N=10000;
+	public Discuss getMaxReply() {
+		List<Discuss> discusses=new ArrayList<Discuss>();
+		DiscussDAO discussdao=DAOFactory.getDiscussDAO();
+		discusses=discussdao.getDiscussByC("");
+		int []a=new int[N];
+		Iterator<Discuss> it=discusses.iterator();
+		while(it.hasNext()) {
+			Discuss discuss=it.next();
+			if(discuss.fatherid!=null) {
+				a[Integer.valueOf(discuss.fatherid)]++;
+			}
+		}
+		int max=0;
+		for(int i=0;i<N;i++) {
+			if(a[i]>max)
+			{
+				max=i;
+			}
+		}
+		Discuss discuss=new Discuss();
+		discuss=discussdao.getDiscuss(String.valueOf(max));
+		return discuss;
+		
+	}
 }
