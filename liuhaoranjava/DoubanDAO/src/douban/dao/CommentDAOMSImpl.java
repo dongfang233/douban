@@ -141,15 +141,15 @@ public class CommentDAOMSImpl extends DAOBase implements CommentDAO{
 		MovieDAO moviedao=DAOFactory.getMovieDAO();//new MovieDAOMSImpl();
 		movies=moviedao.getMovieByC("moviename="+moviename);
 		if(movies.get(0)==null) {
-			//没找到电影名
-		}else { //找到电影名对应id
+			//not found
+		}else { //finded
 			movie=movies.get(0);
 			String movieid=movie.getMovieid();
 			List<Comment> comments=new ArrayList<Comment>();
 			CommentDAO commentdao=new CommentDAOMSImpl();
 			comments=commentdao.getCommentByC("movieid="+movieid);
 			if(comments.get(0)==null) {
-				//该电影无评分
+				//no star
 			}else {
 				Iterator<Comment> it=comments.iterator();
 				int i=0;
