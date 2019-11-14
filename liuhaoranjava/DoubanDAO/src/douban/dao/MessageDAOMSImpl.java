@@ -80,10 +80,10 @@ public class MessageDAOMSImpl extends DAOBase implements MessageDAO{
 			pstm.setString(1, messageid);
 			rs=pstm.executeQuery();
 			rs.next();
-			pstm.setString(1, message.getUserid());
-			pstm.setString(2, message.getMessageid());
-			pstm.setString(3, message.getMessagetext());
-			pstm.setDate(4, message.getMessagetime());
+			message.setUserid(rs.getString("userid"));
+			message.setMessageid(rs.getString("messageid"));
+			message.setMessagetext(rs.getString("messagetext"));
+			message.setMessagetime(rs.getDate("messagetime"));
 			rs.close();
 			pstm.close();
 			conn.close();
@@ -112,10 +112,10 @@ public class MessageDAOMSImpl extends DAOBase implements MessageDAO{
 			rs=stmt.executeQuery(finalsql);
 			while(rs.next()){
 				Message message=new Message();
-				pstm.setString(1, message.getUserid());
-				pstm.setString(2, message.getMessageid());
-				pstm.setString(3, message.getMessagetext());
-				pstm.setDate(4, message.getMessagetime());
+				message.setUserid(rs.getString("userid"));
+				message.setMessageid(rs.getString("messageid"));
+				message.setMessagetext(rs.getString("messagetext"));
+				message.setMessagetime(rs.getDate("messagetime"));
 				messages.add(message);								
 			}
 			rs.close();
