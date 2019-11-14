@@ -32,7 +32,7 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 		}	
 	}
 	
-	private static final String UPDATE_USER_SQL="UPDATE Users SET userid=\'?\',username=\'?\',password=\'?\',phonenum=\'?\',email=\'?\',usertype=\'?\' WHERE userid=\'?\'";
+	private static final String UPDATE_USER_SQL="UPDATE Users SET userid=? ,username=? ,password=? ,phonenum=? ,email=? ,usertype=?  WHERE userid=? ";
 	@Override
 	public void updateUser(User user,String userid) {
 		Connection conn = null;
@@ -56,7 +56,7 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 		
 	}
 	
-	private static final String DELETE_USER_SQL="DELETE FROM Users WHERE userid=\'?\'";
+	private static final String DELETE_USER_SQL="DELETE FROM Users WHERE userid=? ";
 	@Override
 	public void deleteUser(String userid) {
 		Connection conn = null;
@@ -73,7 +73,7 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 		}	
 	}
 
-	private static final String GET_USER_SQL="SELECT * FROM Users WHERE userid=\'?\'";
+	private static final String GET_USER_SQL="SELECT * FROM Users WHERE userid=? ";
 	@Override
 	public User getUser(String userid) {
 		Connection conn = null;

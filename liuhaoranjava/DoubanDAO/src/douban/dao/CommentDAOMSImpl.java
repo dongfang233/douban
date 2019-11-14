@@ -31,7 +31,7 @@ public class CommentDAOMSImpl extends DAOBase implements CommentDAO{
 		}	
 	}
 
-	private static final String UPDATE_COMMENT_SQL="UPDATE Comment SET movieid=\'?\',userid=\'?\',briefcomment=\'?\',starnum=?,type=\'?\' where movieid=\'?\' and userid=\'?\'";
+	private static final String UPDATE_COMMENT_SQL="UPDATE Comment SET movieid=?,userid=?,briefcomment=? ,starnum=? ,type=? where movieid=? and userid=?";
 	@Override
 	public void updateComment(Comment comment, String movieid, String userid) {
 		Connection conn = null;
@@ -54,7 +54,7 @@ public class CommentDAOMSImpl extends DAOBase implements CommentDAO{
 		}	
 	}
 
-	private static final String DELETE_COMMENT_SQL="DELETE FROM Comment WHERE movieid=\'?\' and userid=\'?\'";
+	private static final String DELETE_COMMENT_SQL="DELETE FROM Comment WHERE movieid=? and userid=?";
 	@Override
 	public void deleteComment(String movieid, String userid) {
 		Connection conn = null;
@@ -72,7 +72,7 @@ public class CommentDAOMSImpl extends DAOBase implements CommentDAO{
 		}	
 	}
 
-	private static final String GET_COMMENT_SQL="SELECT * FROM Comment WHERE movieid=\'?\' and userid=\'?\'";
+	private static final String GET_COMMENT_SQL="SELECT * FROM Comment WHERE movieid=? and userid=?";
 	@Override
 	public Comment getComment(String movieid, String userid) {
 		Connection conn = null;

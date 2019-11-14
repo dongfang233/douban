@@ -28,7 +28,7 @@ public class Movie_LabelDAOMSImpl extends DAOBase implements Movie_LabelDAO{
 		}	
 	}
 
-	private static final String UPDATE_MOVIE_LABEL_SQL="UPDATE Movie_Label SET movieid=\'?\',labelid=\'?\',counts=? WHERE movieid=\'?\' and labelid=\'?\'";
+	private static final String UPDATE_MOVIE_LABEL_SQL="UPDATE Movie_Label SET movieid=? ,labelid=? ,counts=? WHERE movieid=?  and labelid=? ";
 	@Override
 	public void updateMovie_Label(Movie_Label movie_label, String movieid, String labelid) {
 		Connection conn = null;
@@ -49,7 +49,7 @@ public class Movie_LabelDAOMSImpl extends DAOBase implements Movie_LabelDAO{
 		}
 	}
 
-	private static final String DELETE_MOVIE_LABEL_SQL="DELETE FROM Movie_Label WHERE movieid=\'?\' and labelid=\'?\'";
+	private static final String DELETE_MOVIE_LABEL_SQL="DELETE FROM Movie_Label WHERE movieid=?  and labelid=? ";
 	@Override
 	public void deleteMovie_Label(String movieid, String labelid) {
 		Connection conn = null;
@@ -67,7 +67,7 @@ public class Movie_LabelDAOMSImpl extends DAOBase implements Movie_LabelDAO{
 		}	
 	}
 
-	private static final String GET_MOVIE_LABEL_SQL="SELECT * FROM Movie_Label WHERE movieid=\'?\' and labelid=\'?\'";
+	private static final String GET_MOVIE_LABEL_SQL="SELECT * FROM Movie_Label WHERE movieid=?  and labelid=? ";
 	@Override
 	public Movie_Label getMovie_Label(String movieid, String labelid) {
 		Connection conn = null;

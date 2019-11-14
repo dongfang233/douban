@@ -27,7 +27,7 @@ public class TypeesDAOMSImpl extends DAOBase implements TypeesDAO{
 		}
 	}
 
-	private static final String UPDATE_TYPESS_SQL="UPDATE Typees SET typeid=\'?\',typename=\'?\' WHERE typeid=\'?\'";
+	private static final String UPDATE_TYPESS_SQL="UPDATE Typees SET typeid=? ,typename=?  WHERE typeid=? ";
 	@Override
 	public void updateTypees(Typees typees, String typeesid) {
 		Connection conn = null;
@@ -46,7 +46,7 @@ public class TypeesDAOMSImpl extends DAOBase implements TypeesDAO{
 		}	
 	}
 
-	private static final String DELETE_TYPEES_SQL="DELETE FROM Typees WHERE typeid=\'?\'";
+	private static final String DELETE_TYPEES_SQL="DELETE FROM Typees WHERE typeid=? ";
 	@Override
 	public void deleteTypees(String typeesid) {
 		Connection conn = null;
@@ -63,7 +63,7 @@ public class TypeesDAOMSImpl extends DAOBase implements TypeesDAO{
 		}	
 	}
 
-	private static final String GET_TYPEES_SQL="SELECT * FROM Typees WHERE typeid=\'?\'";
+	private static final String GET_TYPEES_SQL="SELECT * FROM Typees WHERE typeid=? ";
 	@Override
 	public Typees getTypees(String typeesid) {
 		Connection conn = null;

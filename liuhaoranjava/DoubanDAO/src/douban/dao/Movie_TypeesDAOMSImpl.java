@@ -27,7 +27,7 @@ public class Movie_TypeesDAOMSImpl extends DAOBase implements Movie_TypeesDAO{
 		}
 	}
 	
-	private static final String UPDATE_MOVIE_TYPEES_SQL="UPDATE Movie_Typees SET movieid=\'?\',typeid=\'?\' WHERE movieid=\'?\' and typeid=\'?\'";
+	private static final String UPDATE_MOVIE_TYPEES_SQL="UPDATE Movie_Typees SET movieid=? ,typeid=?  WHERE movieid=?  and typeid=? ";
 	@Override
 	public void updateMovie_Typees(Movie_Typees movie_typees, String movieid,String typeid) {
 		Connection conn = null;
@@ -47,7 +47,7 @@ public class Movie_TypeesDAOMSImpl extends DAOBase implements Movie_TypeesDAO{
 		}
 	}
 
-	private static final String DELETE_MOVIE_TYPEES_SQL="DELETE FROM Movie_Typees WHERE movieid=\'?\' and typeid=\'?\'";
+	private static final String DELETE_MOVIE_TYPEES_SQL="DELETE FROM Movie_Typees WHERE movieid=?  and typeid=? ";
 	@Override
 	public void deleteMovie_Typees(String movieid,String typeid) {
 		Connection conn = null;

@@ -33,8 +33,8 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 		}	
 	}
 	
-	private static final String UPDATE_DISCUSS_SQL="UPDATE Discuss SET discussid=\'?\',"
-			+ "movieid=\'?\',userid=\'?\',title=\'?\',subtance=\'?\',writetime=\'?\',fatherid=\'?\' where discussid=\'?\'";
+	private static final String UPDATE_DISCUSS_SQL="UPDATE Discuss SET discussid=? ,"
+			+ "movieid=? ,userid=? ,title=? ,subtance=? ,writetime=? ,fatherid=?  where discussid=? ";
 	@Override
 	public void updateDiscuss(Discuss discuss,String id) {
 		Connection conn = null;
@@ -59,7 +59,7 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 		
 	}
 	
-	private static final String DELETE_DISCUSS_SQL="DELETE FROM Discuss WHERE discussid=\'?\'";
+	private static final String DELETE_DISCUSS_SQL="DELETE FROM Discuss WHERE discussid=? ";
 	@Override
 	public void deleteDiscuss(String discussid) {
 		Connection conn = null;
@@ -76,7 +76,7 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 		}	
 	}
 
-	private static final String GET_DISCUSS_SQL="SELECT * FROM Discuss WHERE discussid=\'?\'";
+	private static final String GET_DISCUSS_SQL="SELECT * FROM Discuss WHERE discussid=? ";
 	@Override
 	public Discuss getDiscuss(String discussid) {
 		Connection conn = null;

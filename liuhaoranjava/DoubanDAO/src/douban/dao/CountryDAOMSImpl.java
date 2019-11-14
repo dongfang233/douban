@@ -27,7 +27,7 @@ public class CountryDAOMSImpl extends DAOBase implements CountryDAO{
 		}
 	}
 	
-	private static final String UPDATE_COUNTRY_SQL="UPDATE Country SET countryid=\'?\',countryname=\'?\' WHERE countryid=\'?\'";
+	private static final String UPDATE_COUNTRY_SQL="UPDATE Country SET countryid=? ,countryname=?  WHERE countryid=? ";
 	@Override
 	public void updateCountry(Country country,String countryid) {
 		Connection conn = null;
@@ -46,7 +46,7 @@ public class CountryDAOMSImpl extends DAOBase implements CountryDAO{
 		}	
 	}
 
-	private static final String DELETE_COUNTRY_SQL="DELETE FROM Country WHERE countryid=\'?\'";
+	private static final String DELETE_COUNTRY_SQL="DELETE FROM Country WHERE countryid=? ";
 	@Override
 	public void deleteCountry(String countryid) {
 		Connection conn = null;
@@ -95,7 +95,7 @@ public class CountryDAOMSImpl extends DAOBase implements CountryDAO{
 		return countries;
 	}
 
-	private static final String GET_COUNTRY_SQL="SELECT * FROM Country WHERE countryid=\'?\'";
+	private static final String GET_COUNTRY_SQL="SELECT * FROM Country WHERE countryid=? ";
 	@Override
 	public Country getCountry(String countryid) {
 		Connection conn = null;

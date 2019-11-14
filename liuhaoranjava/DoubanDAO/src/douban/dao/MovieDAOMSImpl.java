@@ -35,7 +35,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 		}	
 	}
 	
-	private static final String UPDATE_MOVIE_SQL="UPDATE Movie SET movieid=\'?\',moviename=\'?\',language=\'?\',releasetime=\'?\',filmlength=?,alias=\'?\',moviepicture=\'?\' WHERE movieid=\'?\'";
+	private static final String UPDATE_MOVIE_SQL="UPDATE Movie SET movieid=? ,moviename=? ,language=? ,releasetime=? ,filmlength=?,alias=? ,moviepicture=?  WHERE movieid=? ";
 	@Override
 	public void updateMovie(Movie movie,String movieid) {
 		Connection conn = null;
@@ -60,7 +60,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 		
 	}
 	
-	private static final String DELETE_MOVIE_SQL="DELETE FROM Movie WHERE movieid=\'?\'";
+	private static final String DELETE_MOVIE_SQL="DELETE FROM Movie WHERE movieid=? ";
 	@Override
 	public void deleteMovie(String movieid) {
 		Connection conn = null;
@@ -77,7 +77,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 		}	
 	}
 
-	private static final String GET_MOVIE_SQL="SELECT * FROM Movie WHERE movieid=\'?\'";
+	private static final String GET_MOVIE_SQL="SELECT * FROM Movie WHERE movieid=? ";
 	@Override
 	public Movie getMovie(String movieid) {
 		Connection conn = null;

@@ -29,7 +29,7 @@ public class Movie_StaffDAOMSImpl extends DAOBase implements Movie_StaffDAO{
 		}	
 	}
 
-	private static final String UPDATE_MOVIE_STAFF_SQL="UPDATE Movie_Staff SET movieid=\'?\',staffid=\'?\',rolename=\'?\',position=\'?\' WHERE movieid=\'?\' and staffid=\'?\'";
+	private static final String UPDATE_MOVIE_STAFF_SQL="UPDATE Movie_Staff SET movieid=? ,staffid=? ,rolename=? ,position=?  WHERE movieid=?  and staffid=? ";
 	@Override
 	public void updateMovie_Staff(Movie_Staff movie_staff, String movieid, String staffid) {
 		Connection conn = null;
@@ -51,7 +51,7 @@ public class Movie_StaffDAOMSImpl extends DAOBase implements Movie_StaffDAO{
 		}
 	}
 
-	private static final String DELETE_MOVIE_STAFF_SQL="DELETE FROM Movie_Staff WHERE movieid=\'?\' and staffid=\'?\'";
+	private static final String DELETE_MOVIE_STAFF_SQL="DELETE FROM Movie_Staff WHERE movieid=?  and staffid=? ";
 	@Override
 	public void deleteMovie_Staff(String movieid, String staffid) {
 		Connection conn = null;
@@ -69,7 +69,7 @@ public class Movie_StaffDAOMSImpl extends DAOBase implements Movie_StaffDAO{
 		}	
 	}
 
-	private static final String GET_MOVIE_STAFF_SQL="SELECT * FROM Movie_Staff WHERE movieid=\'?\' and staffid=\'?\'";
+	private static final String GET_MOVIE_STAFF_SQL="SELECT * FROM Movie_Staff WHERE movieid=?  and staffid=? ";
 	@Override
 	public Movie_Staff getMovie_Staff(String movieid, String staffid) {
 		Connection conn = null;

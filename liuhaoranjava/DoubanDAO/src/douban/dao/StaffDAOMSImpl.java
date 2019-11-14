@@ -28,7 +28,7 @@ public class StaffDAOMSImpl extends DAOBase implements StaffDAO{
 		}
 	}
 
-	private static final String UPDATE_STAFF_SQL="UPDATE Staff SET staffid=\'?\',name=\'?\',picture=\'?\' WHERE staffid=\'?\'";
+	private static final String UPDATE_STAFF_SQL="UPDATE Staff SET staffid=? ,name=? ,picture=?  WHERE staffid=? ";
 	@Override
 	public void updateStaff(Staff staff, String staffid) {
 		Connection conn = null;
@@ -48,7 +48,7 @@ public class StaffDAOMSImpl extends DAOBase implements StaffDAO{
 		}	
 	}
 
-	private static final String DELETE_STAFF_SQL="DELETE FROM Staff WHERE staffid=\'?\'";
+	private static final String DELETE_STAFF_SQL="DELETE FROM Staff WHERE staffid=? ";
 	@Override
 	public void deleteStaff(String staffid) {
 		Connection conn = null;
@@ -65,7 +65,7 @@ public class StaffDAOMSImpl extends DAOBase implements StaffDAO{
 		}	
 	}
 
-	private static final String GET_STAFF_SQL="SELECT * FROM Staff WHERE staffid=\'?\'";
+	private static final String GET_STAFF_SQL="SELECT * FROM Staff WHERE staffid=? ";
 	@Override
 	public Staff getStaff(String staffid) {
 		Connection conn = null;

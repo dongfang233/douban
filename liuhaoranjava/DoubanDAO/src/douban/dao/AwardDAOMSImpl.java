@@ -27,7 +27,7 @@ public class AwardDAOMSImpl extends DAOBase implements AwardDAO{
 		}
 	}
 	
-	private static final String UPDATE_AWARD_SQL="UPDATE Award SET awardid=\'?\',prize=\'?\' WHERE awardid=\'?\'";
+	private static final String UPDATE_AWARD_SQL="UPDATE Award SET awardid=?,prize=? WHERE awardid=?";
 	@Override
 	public void updateAward(Award award, String awardid) {
 		Connection conn = null;
@@ -46,7 +46,7 @@ public class AwardDAOMSImpl extends DAOBase implements AwardDAO{
 		}	
 	}
 
-	private static final String DELETE_AWARD_SQL="DELETE FROM Award WHERE awardid=\'?\'";
+	private static final String DELETE_AWARD_SQL="DELETE FROM Award WHERE awardid=?";
 	@Override
 	public void deleteAward(String awardid) {
 		Connection conn = null;
@@ -63,7 +63,7 @@ public class AwardDAOMSImpl extends DAOBase implements AwardDAO{
 		}	
 	}
 
-	private static final String GET_AWARD_SQL="SELECT * FROM Award WHERE awardid=\'?\'";
+	private static final String GET_AWARD_SQL="SELECT * FROM Award WHERE awardid=?";
 	@Override
 	public Award getAward(String awardid) {
 		Connection conn = null;

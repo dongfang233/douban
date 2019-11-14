@@ -27,7 +27,7 @@ public class Movie_CountryDAOMSImpl extends DAOBase implements Movie_CountryDAO{
 		}
 	}
 	
-	private static final String UPDATE_MOVIE_AWARD_SQL="UPDATE Movie_Country SET movieid=\'?\',countryid=\'?\' WHERE movieid=\'?\' and countryid=\'?\'";
+	private static final String UPDATE_MOVIE_AWARD_SQL="UPDATE Movie_Country SET movieid=? ,countryid=?  WHERE movieid=?  and countryid=? ";
 	@Override
 	public void updateMovie_Country(Movie_Country movie_country, String movieid,String countryid) {
 		Connection conn = null;
@@ -47,7 +47,7 @@ public class Movie_CountryDAOMSImpl extends DAOBase implements Movie_CountryDAO{
 		}
 	}
 
-	private static final String DELETE_MOVIE_AWARD_SQL="DELETE FROM Movie_Country WHERE movieid=\'?\' and countryid=\'?\'";
+	private static final String DELETE_MOVIE_AWARD_SQL="DELETE FROM Movie_Country WHERE movieid=?  and countryid=? ";
 	@Override
 	public void deleteMovie_Country(String movieid,String countryid) {
 		Connection conn = null;

@@ -28,7 +28,7 @@ public class LabelDAOMSImpl extends DAOBase implements LabelDAO{
 		
 	}
 
-	private static final String UPDATE_LABEL_SQL="UPDATE Label SET labelid=\'?\',labelname=\'?\' WHERE labelid=\'?\'";
+	private static final String UPDATE_LABEL_SQL="UPDATE Label SET labelid=? ,labelname=?  WHERE labelid=? ";
 	@Override
 	public void updateLabel(Label label, String labelid) {
 		Connection conn = null;
@@ -47,7 +47,7 @@ public class LabelDAOMSImpl extends DAOBase implements LabelDAO{
 		}	
 	}
 
-	private static final String DELETE_LABEL_SQL="DELETE FROM Label WHERE labelid=\'?\'";
+	private static final String DELETE_LABEL_SQL="DELETE FROM Label WHERE labelid=? ";
 	@Override
 	public void deleteLabel(String labelid) {
 		Connection conn = null;
@@ -64,7 +64,7 @@ public class LabelDAOMSImpl extends DAOBase implements LabelDAO{
 		}	
 	}
 
-	private static final String GET_LABEL_SQL="SELECT * FROM Label WHERE labelid=\'?\'";
+	private static final String GET_LABEL_SQL="SELECT * FROM Label WHERE labelid=? ";
 	@Override
 	public Label getLabel(String labelid) {
 		Connection conn = null;
