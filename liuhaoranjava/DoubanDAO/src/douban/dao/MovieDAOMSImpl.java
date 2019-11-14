@@ -1,6 +1,7 @@
 package douban.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -211,7 +212,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 		
 		return movies;
 	}
-	
+	//avg star
 	public List<Movie> getSortByAvg(String asc_des){
 		List<Movie> movies=new ArrayList<Movie>();
 		MovieDAO moviedao=DAOFactory.getMovieDAO();
@@ -243,6 +244,19 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 		while(it.hasNext()) {
 			AvgStarSort avgstarsort=it1.next();
 			movies.add(avgstarsort.getMovie());
+		}
+		return movies;
+	}
+	//getMovie between start and end
+	public List<Movie> getDateMovie(Date start,Date end){
+		List<Movie> movies=new ArrayList<Movie>();
+		List<Movie> temp=new ArrayList<Movie>();
+		MovieDAO moviedao=DAOFactory.getMovieDAO();
+		temp=moviedao.getMovieByC("");
+		for(Movie m:temp) {
+			if(m.getDate().before(end)||m.getDate().after(start)) {
+				movies.add(m);
+			}
 		}
 		return movies;
 	}
