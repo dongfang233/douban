@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -138,6 +140,25 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 				e.printStackTrace();
 			}
 			return discusses;
+	}
+	
+	public List<Discuss> getSortByC(List<Discuss> discusses,String asc_des) {
+		Collections.sort(discusses, new Comparator<Discuss>() {
+			public int compare(Discuss m1, Discuss m2) {
+				if(null == m1.getWritetime()) 
+					return -1;
+				if(null == m2.getWritetime()) 
+					return 1;
+				return m1.getWritetime().compareTo(m2.getWritetime());
+			}
+		}
+				);
+			if(asc_des.equals("des"))
+				Collections.reverse(discusses);
+			
+			
+		
+		return discusses;
 	}
 
 }
