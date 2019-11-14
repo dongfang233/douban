@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -137,5 +139,72 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 				e.printStackTrace();
 			}
 			return movies;
+	}
+	//Provide movieid,moviename,releasetime,filmlength sort
+	public List<Movie> getSortByC(List<Movie> movies,String fun,String asc_des) {
+		switch(fun) {
+		case "movieid":
+			Collections.sort(movies, new Comparator<Movie>() {
+				public int compare(Movie m1, Movie m2) {
+					if(null == m1.getMovieid()) 
+						return -1;
+					if(null == m2.getMovieid()) 
+						return 1;
+					return m1.getMovieid().compareTo(m2.getMovieid());
+				}
+			}
+					);
+			if(asc_des.equals("des"))
+				Collections.reverse(movies);
+			break;
+		case "moviename":
+			Collections.sort(movies, new Comparator<Movie>() {
+				public int compare(Movie m1, Movie m2) {
+					if(null == m1.getMoviename()) 
+						return -1;
+					if(null == m2.getMoviename()) 
+						return 1;
+					return m1.getMoviename().compareTo(m2.getMoviename());
+				}
+			}
+					);
+			if(asc_des.equals("des"))
+				Collections.reverse(movies);
+			break;
+		case "releasetime":
+			Collections.sort(movies, new Comparator<Movie>() {
+				public int compare(Movie m1, Movie m2) {
+					if(null == m1.getDate()) 
+						return -1;
+					if(null == m2.getDate()) 
+						return 1;
+					return m1.getDate().compareTo(m2.getDate());
+				}
+			}
+					);
+			if(asc_des.equals("des"))
+				Collections.reverse(movies);
+			break;
+		case "filmlength":
+			Collections.sort(movies, new Comparator<Movie>() {
+				public int compare(Movie m1, Movie m2) {
+					/*if(null == m1.getTime()) 
+						return -1;
+					if(null == m2.getTime()) 
+						return 1;*/
+					if(m1.getTime()>=(m2.getTime()))
+						return 1;
+					return 0;
+				}
+			}
+					);
+			if(asc_des.equals("des"))
+				Collections.reverse(movies);
+			break;
+			
+			
+		}
+		
+		return movies;
 	}
 }
