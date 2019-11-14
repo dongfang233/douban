@@ -18,7 +18,7 @@ public class User_GroupDAOMSImpl extends DAOBase implements User_GroupDAO{
 			conn = getConnection();
 			pstm = conn.prepareStatement(CREATE_USER_GROUP_SQL);
 			pstm.setString(1, user_group.getUserid());
-			pstm.setString(2, user_group.getGrouopid());
+			pstm.setString(2, user_group.getGroupid());
 			pstm.setString(3, user_group.getLeader());
 			pstm.setString(4, user_group.getJointime());
 			pstm.executeUpdate();
@@ -38,7 +38,7 @@ public class User_GroupDAOMSImpl extends DAOBase implements User_GroupDAO{
 			conn = getConnection();
 			pstm = conn.prepareStatement(UPDATE_USER_GROUP_SQL);
 			pstm.setString(1, user_group.getUserid());
-			pstm.setString(2, user_group.getGrouopid());
+			pstm.setString(2, user_group.getGroupid());
 			pstm.setString(3, user_group.getLeader());
 			pstm.setString(4, user_group.getJointime());
 			pstm.setString(5, userid);
