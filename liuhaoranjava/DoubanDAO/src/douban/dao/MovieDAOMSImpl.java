@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -141,7 +142,10 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 			return movies;
 	}
 	//Provide movieid,moviename,releasetime,filmlength sort
-	public List<Movie> getSortByC(List<Movie> movies,String fun,String asc_des) {
+	public List<Movie> getSortByC(String fun,String asc_des) {
+		List<Movie> movies=new ArrayList<Movie>();
+		MovieDAO moviedao=DAOFactory.getMovieDAO();
+		movies=moviedao.getMovieByC("");
 		switch(fun) {
 		case "movieid":
 			Collections.sort(movies, new Comparator<Movie>() {
@@ -205,6 +209,41 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 			
 		}
 		
+		return movies;
+	}
+	
+	public List<Movie> getSortByAvg(String asc_des){
+		List<Movie> movies=new ArrayList<Movie>();
+		MovieDAO moviedao=DAOFactory.getMovieDAO();
+		movies=moviedao.getMovieByC("");
+		List<AvgStarSort> avgstarsorts=new ArrayList<AvgStarSort>();
+		Iterator<Movie> it=movies.iterator();
+		while(it.hasNext()) {
+			Movie movie=it.next();
+			AvgStarSort avgstarsort=new AvgStarSort();
+			avgstarsort.setMovie(movie);
+			CommentDAOMSImpl commentdao=new CommentDAOMSImpl();
+			avgstarsort.setAvgstar(commentdao.showAvgStar(movie.getMoviename()));
+			avgstarsorts.add(avgstarsort);
+		}
+		Collections.sort(avgstarsorts,new Comparator<AvgStarSort>(){
+			public int compare(AvgStarSort o1, AvgStarSort o2) {
+				if(o1.getAvgstar()>=o2.getAvgstar()) {
+					return 1;
+				}else {
+					return 0;
+				}
+			}
+		});
+		if(asc_des.equals("des")) {
+			Collections.reverse(avgstarsorts);
+		}
+		movies.clear();
+		Iterator<AvgStarSort> it1=avgstarsorts.iterator();
+		while(it.hasNext()) {
+			AvgStarSort avgstarsort=it1.next();
+			movies.add(avgstarsort.getMovie());
+		}
 		return movies;
 	}
 }
