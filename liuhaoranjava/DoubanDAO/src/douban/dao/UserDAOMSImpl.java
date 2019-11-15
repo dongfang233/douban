@@ -32,7 +32,7 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 		}	
 	}
 	
-	private static final String UPDATE_USER_SQL="UPDATE Users SET userid=?,username=?,password=?,phonenum=?,email=?,usertype=? WHERE userid=?";
+	private static final String UPDATE_USER_SQL="UPDATE Users SET userid=?,username=?,passwords=?,phonenum=?,email=?,usertype=? WHERE userid=?";
 	@Override
 	public void updateUser(User user,String userid) {
 		Connection conn = null;
@@ -87,7 +87,7 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 			rs.next();
 			user.setUserid(rs.getString("userid"));
 			user.setUsername(rs.getString("username"));
-			user.setPassword(rs.getString("password"));
+			user.setPassword(rs.getString("passwords"));
 			user.setPhonenum(rs.getString("phonenum"));
 			user.setEmail(rs.getString("email"));
 			user.setUsertype(rs.getInt("usertype"));
@@ -120,7 +120,7 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 					User user = new User();
 					user.setUserid(rs.getString("userid"));
 					user.setUsername(rs.getString("username"));
-					user.setPassword(rs.getString("password"));
+					user.setPassword(rs.getString("passwords"));
 					user.setPhonenum(rs.getString("phonenum"));
 					user.setEmail(rs.getString("email"));
 					user.setUsertype(rs.getInt("usertype"));
@@ -139,7 +139,7 @@ public class UserDAOMSImpl extends DAOBase implements UserDAO{
 	{
 		List<User> users=new ArrayList<User>();
 		UserDAO userdao=DAOFactory.getUserDAO();
-		users=userdao.getUserByC("username="+username+"and password="+password);
+		users=userdao.getUserByC("username="+username+"and passwords="+password);
 		if(users.get(0)==null) {
 			//show the label:username or password error
 		}else {
