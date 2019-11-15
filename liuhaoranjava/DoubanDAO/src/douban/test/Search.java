@@ -28,7 +28,8 @@ public class Search {
 		Print_Movie("");
 		
 		//search label="fantasy" movie information
-		Print_Movie("movieid=any(select movieid from Movie_Label where labelid=any(select labelid from Label where labelname='fantasy'))");
+		Print_Movie("movieid=any(select movieid from Movie_Label where labelid="
+				+ "any(select labelid from Label where labelname='fantasy'))");
 	}
 
 }
