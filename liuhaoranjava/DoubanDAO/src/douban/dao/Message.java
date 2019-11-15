@@ -3,8 +3,9 @@ package douban.dao;
 import java.sql.Date;
 
 public class Message {
-	private String userid;
 	private String messageid;
+	private String userid;
+	private String messagerid;
 	private String messagetext;
 	Date messagetime;
 	public String getUserid() {
@@ -18,6 +19,12 @@ public class Message {
 	}
 	public void setMessageid(String messageid) {
 		this.messageid = messageid;
+	}
+	public String getMessagerid() {
+		return messagerid;
+	}
+	public void setMessagerid(String messagerid) {
+		this.messagerid = messagerid;
 	}
 	public String getMessagetext() {
 		return messagetext;
