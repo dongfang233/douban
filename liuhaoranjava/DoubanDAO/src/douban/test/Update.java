@@ -1,9 +1,12 @@
 package douban.test;
 import douban.dao.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 public class Update {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ParseException {
 		//user
 		String userid=null;
 		User user=new User();
@@ -20,7 +23,10 @@ public class Update {
 		movie.setMovieid("9263");
 		movie.setMoviename("ciaer");
 		movie.setLanguage("English");
-		movie.setDate((java.sql.Date)(new Date(1998-12-03)));
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date date=sdf.parse("1999-08-12");
+		long lg=date.getTime();
+		movie.setDate(new java.sql.Date(lg));
 		movie.setTime(122);
 		movie.setAliasname("ciaero");
 		movie.setMoviepicture(new byte[1]);

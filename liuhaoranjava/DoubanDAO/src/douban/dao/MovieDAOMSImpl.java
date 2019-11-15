@@ -37,7 +37,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 		}	
 	}
 	
-	private static final String UPDATE_MOVIE_SQL="UPDATE Movie SET movieid=? ,moviename=? ,language=? ,releasetime=? ,filmlength=?,alias=? ,moviepicture=?  WHERE movieid=? ";
+	private static final String UPDATE_MOVIE_SQL="UPDATE Movie SET movieid=? ,moviename=? ,languages=? ,releasetime=? ,filmlength=?,alias=? ,moviepicture=?  WHERE movieid=? ";
 	@Override
 	public void updateMovie(Movie movie,String movieid) {
 		Connection conn = null;
@@ -93,7 +93,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 			rs.next();
 			movie.setMovieid(rs.getString("movieid"));
 			movie.setMoviename(rs.getString("moviename"));
-			movie.setLanguage(rs.getString("language"));
+			movie.setLanguage(rs.getString("languages"));
 			movie.setDate(rs.getDate("releasetime"));
 			movie.setTime(rs.getInt("filmlength"));
 			movie.setAliasname(rs.getString("alias"));
@@ -127,7 +127,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 					Movie movie = new Movie();
 					movie.setMovieid(rs.getString("movieid"));
 					movie.setMoviename(rs.getString("moviename"));
-					movie.setLanguage(rs.getString("language"));
+					movie.setLanguage(rs.getString("languages"));
 					movie.setDate(rs.getDate("releasetime"));
 					movie.setTime(rs.getInt("filmlength"));
 					movie.setAliasname(rs.getString("alias"));
