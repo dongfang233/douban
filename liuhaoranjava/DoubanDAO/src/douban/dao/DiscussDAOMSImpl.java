@@ -170,28 +170,37 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 	}
 
 	private static final int N=10000;
-	public Discuss getMaxReply() {
-		List<Discuss> discusses=new ArrayList<Discuss>();
-		DiscussDAO discussdao=DAOFactory.getDiscussDAO();
-		discusses=discussdao.getDiscussByC("");
-		int []a=new int[N];
-		Iterator<Discuss> it=discusses.iterator();
-		while(it.hasNext()) {
+	public Discuss getMaxReply(String moviename) {
+		Movie movie=new Movie();
+		List<Movie> movies = new ArrayList<Movie>();
+		MovieDAO moviedao=DAOFactory.getMovieDAO();
+		movies=moviedao.getMovieByC("moviename="+moviename);
+		if(movies.get(0)==null) {
+			return null;//not found
+		}else { //finded
+			movie=movies.get(0);
+			String movieid=movie.getMovieid();
+			List<Discuss> discusses=new ArrayList<Discuss>();
+			DiscussDAO discussdao=DAOFactory.getDiscussDAO();
+			discusses=discussdao.getDiscussByC("movieid="+movieid);
+			int []a=new int[N];
+			Iterator<Discuss> it=discusses.iterator();
+			while(it.hasNext()) {
 			Discuss discuss=it.next();
 			if(discuss.fatherid!=null) {
 				a[Integer.valueOf(discuss.fatherid)]++;
+				}
 			}
-		}
-		int max=0;
-		for(int i=0;i<N;i++) {
-			if(a[i]>max)
-			{
-				max=i;
+			int max=0;
+			for(int i=0;i<N;i++) {
+				if(a[i]>max)
+				{
+					max=i;
+				}
 			}
+			Discuss discuss=new Discuss();
+			discuss=discussdao.getDiscuss(String.valueOf(max));
+			return discuss;
 		}
-		Discuss discuss=new Discuss();
-		discuss=discussdao.getDiscuss(String.valueOf(max));
-		return discuss;
-		
 	}
 }

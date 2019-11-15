@@ -9,5 +9,5 @@ public interface DiscussDAO {
 	public Discuss getDiscuss(String discussid);
 	public List<Discuss> getDiscussByC(String sql);
 	public List<Discuss> getSortByC(String asc_des);
-	public Discuss getMaxReply();
+	public Discuss getMaxReply(String moviename);
 }
