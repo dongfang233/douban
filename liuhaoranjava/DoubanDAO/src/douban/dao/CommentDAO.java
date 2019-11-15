@@ -8,4 +8,5 @@ public interface CommentDAO {
 	public void deleteComment(String movieid,String userid);
 	public Comment getComment(String movieid,String userid);
 	public List<Comment> getCommentByC(String sql);
+	public int showAvgStar(String moviename);
 }

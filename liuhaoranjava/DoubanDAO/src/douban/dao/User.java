@@ -6,7 +6,7 @@ public class User {
 	private String password;
 	private String phonenum;
 	private String email;
-	private int usertype;//(0为管理员，1为普通用户)
+	private int usertype;//(0:admin,1:user 
 	public String getUserid() {
 		return userid;
 	}

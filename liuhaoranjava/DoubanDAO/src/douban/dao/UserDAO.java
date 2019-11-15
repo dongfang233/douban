@@ -8,4 +8,5 @@ public interface UserDAO {
 	public void deleteUser(String userid);
 	public User getUser(String userid);
 	public List<User> getUserByC(String sql);
+	public void logIn(String username,String password);
 }

@@ -8,4 +8,6 @@ public interface DiscussDAO {
 	public void deleteDiscuss(String discussid);
 	public Discuss getDiscuss(String discussid);
 	public List<Discuss> getDiscussByC(String sql);
+	public List<Discuss> getSortByC(String asc_des);
+	public Discuss getMaxReply();
 }

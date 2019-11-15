@@ -146,7 +146,7 @@ public class CommentDAOMSImpl extends DAOBase implements CommentDAO{
 			movie=movies.get(0);
 			String movieid=movie.getMovieid();
 			List<Comment> comments=new ArrayList<Comment>();
-			CommentDAO commentdao=new CommentDAOMSImpl();
+			CommentDAO commentdao=DAOFactory.getCommentDAO();
 			comments=commentdao.getCommentByC("movieid="+movieid);
 			if(comments.get(0)==null) {
 				//no star

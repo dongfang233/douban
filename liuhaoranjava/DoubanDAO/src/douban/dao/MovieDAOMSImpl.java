@@ -223,7 +223,7 @@ public class MovieDAOMSImpl extends DAOBase implements MovieDAO{
 			Movie movie=it.next();
 			AvgStarSort avgstarsort=new AvgStarSort();
 			avgstarsort.setMovie(movie);
-			CommentDAOMSImpl commentdao=new CommentDAOMSImpl();
+			CommentDAO commentdao=DAOFactory.getCommentDAO();
 			avgstarsort.setAvgstar(commentdao.showAvgStar(movie.getMoviename()));
 			avgstarsorts.add(avgstarsort);
 		}
