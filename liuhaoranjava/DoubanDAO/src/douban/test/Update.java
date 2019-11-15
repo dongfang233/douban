@@ -13,6 +13,7 @@ public class Update {
 		user.setPhonenum("15623238572");
 		user.setEmail("123.163.com");
 		user.setUsertype(1);
+		userid="812";
 		//movie
 		String movieid=null;
 		Movie movie=new Movie();
@@ -23,6 +24,7 @@ public class Update {
 		movie.setTime(122);
 		movie.setAliasname("ciaero");
 		movie.setMoviepicture(new byte[1]);
+		movieid="812";
 		//update
 		DAOFactory.getUserDAO().updateUser(user,userid);
 		DAOFactory.getMovieDAO().updateMovie(movie,movieid);
