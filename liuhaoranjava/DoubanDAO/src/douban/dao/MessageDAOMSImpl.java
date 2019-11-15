@@ -9,7 +9,7 @@ import java.util.List;
 
 public class MessageDAOMSImpl extends DAOBase implements MessageDAO{
 
-	private static final String CREATE_MESSAGE_SQL="INSERT INTO Message VALUES(?,?,?,?)";
+	private static final String CREATE_MESSAGE_SQL="INSERT INTO Messagees VALUES(?,?,?,?,?)";
 	@Override
 	public void insertMessage(Message message) {
 		Connection conn = null;
@@ -17,10 +17,12 @@ public class MessageDAOMSImpl extends DAOBase implements MessageDAO{
 		try{
 			conn = getConnection();
 			pstm = conn.prepareStatement(CREATE_MESSAGE_SQL);
-			pstm.setString(1, message.getUserid());
-			pstm.setString(2, message.getMessageid());
-			pstm.setString(3, message.getMessagetext());
-			pstm.setDate(4, message.getMessagetime());
+			
+			pstm.setString(1, message.getMessageid());
+			pstm.setString(2, message.getUserid());
+			pstm.setString(3, message.getMessagerid());
+			pstm.setString(4, message.getMessagetext());
+			pstm.setDate(5, message.getMessagetime());
 			pstm.executeUpdate();
 			pstm.close();
 			conn.close();
@@ -30,7 +32,7 @@ public class MessageDAOMSImpl extends DAOBase implements MessageDAO{
 		
 	}
 
-	private static final String UPDATE_MESSAGE_SQL="UPDATE Message SET messageid=? ,messagename=?  WHERE messageid=? ";
+	private static final String UPDATE_MESSAGE_SQL="UPDATE Messagees SET messageid=? ,userid=? ,messagerid=? ,messagetext=? ,messagetime=? WHERE messageid=? ";
 	@Override
 	public void updateMessage(Message message, String messageid) {
 		Connection conn = null;
@@ -38,10 +40,11 @@ public class MessageDAOMSImpl extends DAOBase implements MessageDAO{
 		try{
 			conn = getConnection();
 			pstm = conn.prepareStatement(UPDATE_MESSAGE_SQL);
-			pstm.setString(1, message.getUserid());
-			pstm.setString(2, message.getMessageid());
-			pstm.setString(3, message.getMessagetext());
-			pstm.setDate(4, message.getMessagetime());
+			pstm.setString(1, message.getMessageid());
+			pstm.setString(2, message.getUserid());
+			pstm.setString(3, message.getMessagerid());
+			pstm.setString(4, message.getMessagetext());
+			pstm.setDate(5, message.getMessagetime());
 			pstm.executeUpdate();
 			pstm.close();
 			conn.close();
@@ -50,7 +53,7 @@ public class MessageDAOMSImpl extends DAOBase implements MessageDAO{
 		}	
 	}
 
-	private static final String DELETE_MESSAGE_SQL="DELETE FROM Message WHERE messageid=? ";
+	private static final String DELETE_MESSAGE_SQL="DELETE FROM Messagees WHERE messageid=? ";
 	@Override
 	public void deleteMessage(String messageid) {
 		Connection conn = null;
@@ -67,7 +70,7 @@ public class MessageDAOMSImpl extends DAOBase implements MessageDAO{
 		}	
 	}
 
-	private static final String GET_MESSAGE_SQL="SELECT * FROM Message WHERE messageid=? ";
+	private static final String GET_MESSAGE_SQL="SELECT * FROM Messagees WHERE messageid=? ";
 	@Override
 	public Message getMessage(String messageid) {
 		Connection conn = null;
@@ -82,6 +85,7 @@ public class MessageDAOMSImpl extends DAOBase implements MessageDAO{
 			rs.next();
 			message.setUserid(rs.getString("userid"));
 			message.setMessageid(rs.getString("messageid"));
+			message.setMessagerid(rs.getString("messagerid"));
 			message.setMessagetext(rs.getString("messagetext"));
 			message.setMessagetime(rs.getDate("messagetime"));
 			rs.close();
@@ -93,7 +97,7 @@ public class MessageDAOMSImpl extends DAOBase implements MessageDAO{
 		return message;
 	}
 
-	private static final String SEARCH_MESSAGE_SQL="SELECT * FROM Message";
+	private static final String SEARCH_MESSAGE_SQL="SELECT * FROM Messagees";
 	@Override
 	public List<Message> getMessageByC(String sql) {
 		List<Message> messages = new ArrayList<Message>();
@@ -114,6 +118,7 @@ public class MessageDAOMSImpl extends DAOBase implements MessageDAO{
 				Message message=new Message();
 				message.setUserid(rs.getString("userid"));
 				message.setMessageid(rs.getString("messageid"));
+				message.setMessagerid(rs.getString("messagerid"));
 				message.setMessagetext(rs.getString("messagetext"));
 				message.setMessagetime(rs.getDate("messagetime"));
 				messages.add(message);								
