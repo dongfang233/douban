@@ -5,17 +5,17 @@ import douban.dao.*;
 public class six_method {
 
 	public static void main(String[] args) {
+		final String asc_des="asc";
+		final String moviename=null;
 		//avg star
-		String moviename=null;
 		DAOFactory.getCommentDAO().showAvgStar(moviename);
 		
 		//discuss sort
-		
+		DAOFactory.getDiscussDAO().getSortByC(moviename, asc_des);
 		//discuss max follow
-		
+		DAOFactory.getDiscussDAO().getMaxReply(moviename);
 		//movie sort
 		String fun=moviename;
-		String asc_des="asc";
 		DAOFactory.getMovieDAO().getSortByC(fun, asc_des);
 		//sort by star
 		DAOFactory.getMovieDAO().getSortByAvg(asc_des);

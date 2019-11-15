@@ -147,26 +147,34 @@ public class DiscussDAOMSImpl extends DAOBase implements DiscussDAO{
 			return discusses;
 	}
 	
-	public List<Discuss> getSortByC(String asc_des) {
-		List<Discuss> discusses=new ArrayList<Discuss>();
-		DiscussDAO discussdao=DAOFactory.getDiscussDAO();
-		discusses=discussdao.getDiscussByC("");
-		Collections.sort(discusses, new Comparator<Discuss>() {
+	public List<Discuss> getSortByC(String moviename,String asc_des) {
+		Movie movie=new Movie();
+		List<Movie> movies = new ArrayList<Movie>();
+		MovieDAO moviedao=DAOFactory.getMovieDAO();
+		movies=moviedao.getMovieByC("moviename="+moviename);
+		if(movies.get(0)==null) {
+			return null;//not found
+		}else { //finded
+			movie=movies.get(0);
+			String movieid=movie.getMovieid();
+			List<Discuss> discusses=new ArrayList<Discuss>();
+			DiscussDAO discussdao=DAOFactory.getDiscussDAO();
+			discusses=discussdao.getDiscussByC("movieid="+movieid);
+			Collections.sort(discusses, new Comparator<Discuss>() {
 			public int compare(Discuss m1, Discuss m2) {
 				if(null == m1.getWritetime()) 
 					return -1;
 				if(null == m2.getWritetime()) 
 					return 1;
 				return m1.getWritetime().compareTo(m2.getWritetime());
+				}
 			}
-		}
-				);
+					);
 			if(asc_des.equals("des"))
 				Collections.reverse(discusses);
 			
-			
-		
-		return discusses;
+			return discusses;
+		}
 	}
 
 	private static final int N=10000;
